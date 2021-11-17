@@ -10,4 +10,5 @@ public interface PotatoRepository extends CrudRepository<Potato,Integer> {
 
     void deleteById(long id);
 
+
 }

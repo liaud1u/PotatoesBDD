@@ -22,7 +22,7 @@ public class PotatoesBddApplication {
     }
 
     @Bean
-    public CommandLineRunner loadVariety(PotatoRepository repository){
+    public CommandLineRunner variety(PotatoRepository repository){
         return (args) -> {
             // Read the .csv file and put in BDD
             BufferedReader br = null;
@@ -95,6 +95,7 @@ public class PotatoesBddApplication {
             repository.findByColourOfSkin("Cream").forEach(p->{
                 System.out.println(p.toString());
             });
+
         };
     }
 }
