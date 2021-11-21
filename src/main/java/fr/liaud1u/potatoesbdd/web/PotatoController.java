@@ -3,6 +3,7 @@ package fr.liaud1u.potatoesbdd.web;
 import fr.liaud1u.potatoesbdd.model.Potato;
 import fr.liaud1u.potatoesbdd.model.PotatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -38,7 +39,7 @@ public class PotatoController {
      *
      * @param potato Potato to add to the DAO
      */
-    @PostMapping(value = "Potatoes")
+    @PostMapping(value = "Potato")
     public void addPotato(@RequestBody Potato potato) {
         potatoDAO.save(potato);
     }
@@ -48,9 +49,10 @@ public class PotatoController {
      *
      * @param id int id of potato to delete
      */
+    @Transactional
     @DeleteMapping("/Potato/{id}")
-    void deleteEmployee(@PathVariable long id) {
-        potatoDAO.deleteById(id);
+    void deletePotato(@PathVariable long id) {
+        potatoDAO.delete(potatoDAO.findById(id));
     }
 
     /**
@@ -68,7 +70,6 @@ public class PotatoController {
         pot.setColourOfFlower(potato.getColourOfFlower());
         pot.setHeight(potato.getHeight());
         pot.setMaturity(potato.getMaturity());
-        pot.setId(potato.getId());
         pot.setParentage(potato.getParentage());
         pot.setColourOfSkin(potato.getColourOfSkin());
         pot.setIVTVariety(potato.getIVTVariety());
