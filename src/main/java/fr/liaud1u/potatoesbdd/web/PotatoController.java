@@ -3,11 +3,15 @@ package fr.liaud1u.potatoesbdd.web;
 import fr.liaud1u.potatoesbdd.model.Potato;
 import fr.liaud1u.potatoesbdd.model.PotatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PotatoController {
+
+    @Value("${me}")
+    private String me;
 
     // Potato DAO used for the requests
     @Autowired
@@ -21,6 +25,16 @@ public class PotatoController {
     @GetMapping(value = "/Potatoes")
     public Iterable<Potato> getPotatoes() {
         return potatoDAO.findAll();
+    }
+
+    /**
+     * Return the user name
+     *
+     * @return String name
+     */
+    @GetMapping(value = "/Cqui")
+    public String getMe() {
+        return me;
     }
 
     /**
